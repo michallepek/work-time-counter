@@ -1,6 +1,6 @@
 use std::env;
 use std::error::Error;
-use work_time::{validate_input, parse_args_to_time, count_work_time};
+use work_time_counter::{validate_input, parse_args_to_time, count_work_time};
 
 fn main() -> Result<(), Box<dyn Error>> {
     let args: Vec<String> = env::args().skip(1).collect();
@@ -19,7 +19,7 @@ fn main() -> Result<(), Box<dyn Error>> {
 
     let duration = count_work_time(time_list.unwrap());
     let minutes = duration.num_minutes() - duration.num_hours() * 60;
-    println!("Time at work: {}:{}", duration.num_hours(), minutes);
+    println!("Time at work: {}:{:0>2}", duration.num_hours(), minutes);
     Ok(())
 }
 
