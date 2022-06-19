@@ -49,3 +49,32 @@ pub fn count_work_time(time_list: Vec<NaiveTime>) -> Duration {
 
     result
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn should_count_simple_8_h_work_time() {
+        let work_time_result = count_work_time(vec![
+            NaiveTime::from_hms(7, 0, 0),
+            NaiveTime::from_hms(15, 0, 0)
+        ]);
+
+        let expected_duration = Duration::hours(8);
+        assert_eq!(work_time_result, expected_duration);
+    }
+
+    #[test]
+    fn should_count_8_h_work_time_with_break() {
+        let work_time_result = count_work_time(vec![
+            NaiveTime::from_hms(7, 0, 0),
+            NaiveTime::from_hms(8, 0, 0),
+            NaiveTime::from_hms(8, 15, 0),
+            NaiveTime::from_hms(15, 15, 0),
+        ]);
+
+        let expected_duration = Duration::hours(8);
+        assert_eq!(work_time_result, expected_duration);
+    }
+}
