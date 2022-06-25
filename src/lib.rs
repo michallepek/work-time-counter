@@ -1,8 +1,17 @@
+//! The program counts the work time
+//! Examples:
+//! - `$ cargo run 8:00 16:00`
+//! - `$ cargo run 8:00 15:00 16:00 17:00`
+//! In both examples the work time will be equal to 8 hours
+
 use std::ops::Add;
 use std::str::FromStr;
 use chrono::naive::NaiveTime;
 use chrono::{Duration, ParseResult};
 
+/// General validation of input parameters
+/// - Is the min number of values
+/// - Is the number of arguments even
 pub fn validate_input(args: Vec<String>) -> bool {
     let len = args.len();
     let has_more_than_two_args = len >= 2;
@@ -10,6 +19,7 @@ pub fn validate_input(args: Vec<String>) -> bool {
     has_more_than_two_args && args_number_is_even
 }
 
+/// Convert args to time with a validation
 pub fn parse_args_to_time(args: Vec<String>) -> Option<Vec<NaiveTime>> {
     let mut time_list: Vec<NaiveTime> = Vec::new();
 
@@ -26,6 +36,7 @@ pub fn parse_args_to_time(args: Vec<String>) -> Option<Vec<NaiveTime>> {
     return Some(time_list);
 }
 
+/// Subtracts pairs of values and sums the differences
 pub fn count_work_time(time_list: Vec<NaiveTime>) -> Duration {
     let mut result: Duration = Duration::seconds(0);
     let mut diffs_to_sum: Vec<Duration> = Vec::new();
