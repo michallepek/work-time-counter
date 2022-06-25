@@ -2,6 +2,7 @@
 //! Examples:
 //! - `$ cargo run 8:00 16:00`
 //! - `$ cargo run 8:00 15:00 16:00 17:00`
+//!
 //! In both examples the work time will be equal to 8 hours
 
 use std::ops::Add;
@@ -33,7 +34,7 @@ pub fn parse_args_to_time(args: Vec<String>) -> Option<Vec<NaiveTime>> {
         time_list.push(parse_res.unwrap());
     }
 
-    return Some(time_list);
+    Some(time_list)
 }
 
 /// Subtracts pairs of values and sums the differences
